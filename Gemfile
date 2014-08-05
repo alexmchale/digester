@@ -10,3 +10,5 @@ gem 'jbuilder', '~> 2.0'
 gem 'spring', group: :development
 gem 'omniauth'
 gem 'omniauth-instapaper'
+gem 'bcrypt'
+gem 'inherited_resources'
