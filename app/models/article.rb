@@ -28,6 +28,7 @@ class Article < ActiveRecord::Base
     # Write the content to disk.
     File.open(txt_filename, "w") do |f|
       f.puts "#{ title } by #{ author }"
+      f.puts ",,,"
       f.puts body
     end
 

@@ -4,4 +4,6 @@ h2 = @article.author
 div
   audio controls="controls" src="/articles/#{ @article.id }.mp3"
 
+div = link_to("Back to articles list", articles_path)
+
 div = simple_format(@article.body)
