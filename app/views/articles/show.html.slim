@@ -1,0 +1,7 @@
+h1 = @article.title
+h2 = @article.author
+
+div
+  audio controls="controls" src="/articles/#{ @article.id }.mp3"
+
+div = simple_format(@article.body)

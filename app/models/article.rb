@@ -7,11 +7,17 @@ class Article < ActiveRecord::Base
   end
 
   def title
-    pismo.title
+    pismo.titles.inject("") do |title1, title2|
+      if title1.length > title2.length
+        title1
+      else
+        title2
+      end
+    end
   end
 
   def author
-    pismo.author
+    pismo.authors.join(", ")
   end
 
   def body
