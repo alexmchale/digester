@@ -1,0 +1,8 @@
+h1 = "Create a new user account"
+
+= simple_form_for @user do |f|
+
+  = f.input :email, as: :string
+  = f.input :password
+
+  = f.submit
