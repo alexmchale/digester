@@ -1,11 +1,16 @@
 class ArticleEncoder
 
-  attr_reader :article, :transcript, :sha256, :duration, :file_size, :mime_type
+  attr_reader :article, :transcript, :sha256, :duration, :file_size,
+    :mime_type, :aiff_voice, :txt_filename, :aiff_filename, :mp3_filename
 
   def initialize(article)
-    @article    = article
-    @transcript = article.transcript
-    @sha256     = Digest::SHA256.hexdigest(transcript)
+    @article       = article
+    @transcript    = article.transcript
+    @sha256        = Digest::SHA256.hexdigest(transcript)
+    @aiff_voice    = "Alex"
+    @txt_filename  = Rails.root.join("tmp", "#{ sha256 }.txt")
+    @aiff_filename = Rails.root.join("tmp", "#{ sha256 }.aiff")
+    @mp3_filename  = Rails.root.join("tmp", "#{ sha256 }.mp3")
   end
 
   def encode
@@ -42,22 +47,6 @@ class ArticleEncoder
     [ txt_filename, aiff_filename, mp3_filename ].each do |filename|
       FileUtils.rm_rf filename
     end
-  end
-
-  def txt_filename
-    Rails.root.join("public", "articles", "#{ sha256 }.txt")
-  end
-
-  def aiff_filename
-    Rails.root.join("public", "articles", "#{ sha256 }.aiff")
-  end
-
-  def mp3_filename
-    Rails.root.join("public", "articles", "#{ sha256 }.mp3")
-  end
-
-  def aiff_voice
-    "Alex"
   end
 
 end
