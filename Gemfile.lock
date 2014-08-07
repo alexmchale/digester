@@ -172,4 +172,5 @@ DEPENDENCIES
   slim-rails
   spring
   sqlite3
+  taglib-ruby
   uglifier (>= 1.3.0)
