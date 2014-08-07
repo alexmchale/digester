@@ -22,7 +22,11 @@ class ArticleTexter
   end
 
   def author
-    pismo.authors.join(", ")
+    if pismo.authors.present?
+      pismo.authors.join(", ")
+    else
+      "Unknown Author"
+    end
   end
 
   def body

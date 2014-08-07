@@ -1,7 +1,11 @@
 class Article < ActiveRecord::Base
 
+  belongs_to :user
+
   before_save :create_transcript
   after_save :create_mp3
+
+  validates :user_id, presence: true
 
   def mp3_ready?
     sha256.present?
