@@ -1,6 +1,6 @@
 class ArticleEncoder
 
-  attr_reader :article, :transcript, :sha256
+  attr_reader :article, :transcript, :sha256, :duration, :file_size, :mime_type
 
   def initialize(article)
     @article    = article
@@ -25,6 +25,13 @@ class ArticleEncoder
       aiff_filename,
       mp3_filename,
     ].map(&:to_s).map(&:shellescape)
+
+    # Read back details about the MP3.
+    TagLib::FileRef.open(mp3_filename.to_s) do |fileref|
+      @mime_type = "audio/mp3"
+      @file_size = File.size(mp3_filename)
+      @duration  = fileref.audio_properties.length
+    end
 
     # Return self so we can chain.
     self

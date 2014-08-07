@@ -34,7 +34,16 @@ class Article < ActiveRecord::Base
 
   def create_mp3
     return if sha256 == Digest::SHA256.hexdigest(transcript)
-    update_column(:sha256, ArticleEncoder.new(self).encode.sha256)
+
+    encoder = ArticleEncoder.new(self)
+    return unless encoder.encode
+
+    update_attributes!({
+      :mp3_duration  => encoder.duration  ,
+      :mp3_mime_type => encoder.mime_type ,
+      :mp3_file_size => encoder.file_size ,
+      :sha256        => encoder.sha256    ,
+    })
   end
 
 end

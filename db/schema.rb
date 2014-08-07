@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140807112703) do
+ActiveRecord::Schema.define(version: 20140807144228) do
 
   create_table "articles", force: true do |t|
     t.text     "url"
@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 20140807112703) do
     t.text     "transcript"
     t.string   "sha256"
     t.integer  "user_id"
+    t.integer  "mp3_duration"
+    t.string   "mp3_mime_type"
+    t.integer  "mp3_file_size"
   end
 
   create_table "users", force: true do |t|

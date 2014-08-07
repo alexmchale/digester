@@ -17,7 +17,11 @@ class Feed
   end
 
   def items
-    []
+    user.articles
+      .order("published_at DESC")
+      .to_a
+      .select(&:mp3_ready?)
+      .map { |article| FeedItem.new(article) }
   end
 
   def to_xml

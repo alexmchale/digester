@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
 
   validates :email, uniqueness: { case_sensitive: false }
 
+  has_many :articles
+
   before_save :generate_secret_key
 
   include BCrypt
