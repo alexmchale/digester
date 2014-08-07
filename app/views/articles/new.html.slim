@@ -5,3 +5,5 @@ h1 = "Add a new article"
   = f.input :url, as: :string, input_html: { autofocus: true }
 
   = f.submit
+
+div = link_to("Cancel, go back to the list of articles", articles_path)

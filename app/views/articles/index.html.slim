@@ -5,6 +5,7 @@ table
 
   thead
     tr
+      th = "Date"
       th = "Title"
       th = "Author"
       th = "URL"
@@ -13,10 +14,14 @@ table
   tbody
     - @articles.each do |article|
       tr
+        td = article.published_at.strftime("%b %d, %Y")
         td = article.title
         td = article.author
-        td = article.url
         td
+          = link_to(truncate(article.url, length: 50), article.url)
+        td
+          = link_to("View", article_path(article))
+          = raw " &mdash; "
           = link_to("Remove", article_path(article), method: :delete)
 
 h1 = "Podcast Feed"
