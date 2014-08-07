@@ -1,66 +1,36 @@
 class Article < ActiveRecord::Base
 
+  before_save :create_transcript
   after_save :create_mp3
 
-  def pismo
-    @pismo ||= Pismo::Document.new(url)
+  def mp3_ready?
+    sha256.present?
   end
 
-  def title
-    pismo.titles.inject("") do |title1, title2|
-      if title1.length > title2.length
-        title1
-      else
-        title2
-      end
+  def create_transcript
+    # If we just have a URL, run it through the texter to get its details.
+    if url.present? && (new_record? || url_changed?)
+      texter = ArticleTexter.new(self)
+
+      self.title        = texter.title
+      self.author       = texter.author
+      self.published_at = texter.published_at
+      self.body         = texter.body
     end
-  end
 
-  def author
-    pismo.authors.join(", ")
-  end
+    # Set some defaults if we don't know the data.
+    self.title        = "Unknown Title"  if title.blank?
+    self.author       = "Unknown Author" if author.blank?
+    self.published_at = Time.now         if published_at.blank?
+    self.body         = ""               if body.blank?
 
-  def body
-    pismo.body
+    # Build the transcript that the voice engine will read.
+    self.transcript = [ title, "by", author, ",,,", body ].join(" ")
   end
 
   def create_mp3
-    # Write the content to disk.
-    File.open(txt_filename, "w") do |f|
-      f.puts "#{ title } by #{ author }"
-      f.puts ",,,"
-      f.puts body
-    end
-
-    # Build the AIFF file.
-    system "echo %s | say -o %s -v %s -f %s" % [
-      body,
-      aiff_filename,
-      aiff_voice,
-      txt_filename,
-    ].map(&:to_s).map(&:shellescape)
-
-    # Encode an MP3.
-    system "lame --preset voice %s %s" % [
-      aiff_filename,
-      mp3_filename,
-    ].map(&:to_s).map(&:shellescape)
-  end
-
-  def txt_filename
-    Rails.root.join("public", "articles", "#{ id }.txt")
-  end
-
-  def aiff_filename
-    Rails.root.join("public", "articles", "#{ id }.aiff")
-  end
-
-  def mp3_filename
-    Rails.root.join("public", "articles", "#{ id }.mp3")
-  end
-
-  def aiff_voice
-    "Alex"
+    return if sha256 == Digest::SHA256.hexdigest(transcript)
+    update_column(:sha256, ArticleEncoder.new(self).encode.sha256)
   end
 
 end

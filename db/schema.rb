@@ -11,13 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140805104336) do
+ActiveRecord::Schema.define(version: 20140806123936) do
 
   create_table "articles", force: true do |t|
     t.text     "url"
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "title"
+    t.text     "author"
+    t.datetime "published_at"
+    t.text     "transcript"
+    t.string   "sha256"
   end
 
   create_table "users", force: true do |t|
