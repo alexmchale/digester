@@ -52,6 +52,9 @@ class Article < ActiveRecord::Base
       :mp3_url       => publisher.s3_url  ,
       :sha256        => encoder.sha256    ,
     })
+
+    # Clean up the local files created during the encode.
+    encoder.purge
   end
 
 end

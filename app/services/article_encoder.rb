@@ -37,6 +37,13 @@ class ArticleEncoder
     self
   end
 
+  def purge
+    # Remove the local files that were created during encode.
+    [ txt_filename, aiff_filename, mp3_filename ].each do |filename|
+      FileUtils.rm_rf filename
+    end
+  end
+
   def txt_filename
     Rails.root.join("public", "articles", "#{ sha256 }.txt")
   end
