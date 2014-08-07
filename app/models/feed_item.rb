@@ -6,6 +6,8 @@ class FeedItem
     @article = article
   end
 
+  ## The method definitions below are used by Podcastinator to generate the feed.
+
   def title
     article.title
   end
@@ -47,7 +49,7 @@ class FeedItem
   end
 
   def time
-    published_at || created_at || Time.now
+    published_at || created_at
   end
 
   def duration
@@ -56,14 +58,6 @@ class FeedItem
 
   def keywords
     []
-  end
-
-  def mp3_ready?
-    sha256.present?
-  end
-
-  def to_feed_item
-
   end
 
 end
