@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   end
 
   def generate_secret_key
-    return if secret_key.blank?
+    return if secret_key.present?
     self.secret_key = SecureRandom.urlsafe_base64(1024).gsub(/[^a-zA-Z0-9]/, "")[0, 32]
   end
 
