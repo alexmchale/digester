@@ -2,7 +2,7 @@ h1 = @article.title
 h2 = @article.author
 
 div
-  audio controls="controls" src="/articles/#{ @article.sha256 }.mp3"
+  audio controls="controls" src=h(@article.mp3_url)
 
 div = link_to("Back to articles list", articles_path)
 
