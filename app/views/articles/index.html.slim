@@ -1,9 +1,23 @@
 h1 = "Articles"
 div = link_to "Add a new article", new_article_path
 
-- @articles.each do |article|
+table
 
-  div = link_to(article.url, article_path(article))
+  thead
+    tr
+      th = "Title"
+      th = "Author"
+      th = "URL"
+      td
+
+  tbody
+    - @articles.each do |article|
+      tr
+        td = article.title
+        td = article.author
+        td = article.url
+        td
+          = link_to("Remove", article_path(article), method: :delete)
 
 h1 = "Podcast Feed"
 div = link_to "Link to your custom podcast feed", feed_path(current_user.secret_key)
