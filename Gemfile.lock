@@ -83,6 +83,9 @@ GEM
       fast-stemmer
       nokogiri
       sanitize
+    podcastinator (0.0.2)
+      mime-types (~> 1.25)
+      nokogiri (~> 1.6)
     polyglot (0.3.5)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -160,6 +163,7 @@ DEPENDENCIES
   omniauth
   omniauth-instapaper
   pismo
+  podcastinator
   rails (= 4.1.4)
   sass-rails (~> 4.0.3)
   simple_form
