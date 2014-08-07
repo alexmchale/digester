@@ -1,5 +1,7 @@
 class ArticlesController < InheritedResourcesController
 
+  check_signed_in!
+
   protected
 
   def permitted_params

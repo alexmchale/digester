@@ -1,0 +1,12 @@
+h1 = "Sign in"
+
+= simple_form_for @user_session do |f|
+
+  = f.error_notification
+
+  = f.input :email, as: :string
+  = f.input :password, as: :password
+
+  = f.submit
+
+div = link_to "Click here to create a new user account", new_user_path
