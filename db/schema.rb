@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140806123936) do
+ActiveRecord::Schema.define(version: 20140807110135) do
 
   create_table "articles", force: true do |t|
     t.text     "url"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20140806123936) do
     t.string   "password_hash"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "secret_key"
   end
 
 end
