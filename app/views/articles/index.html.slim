@@ -4,3 +4,6 @@ div = link_to "Add a new article", new_article_path
 - @articles.each do |article|
 
   div = link_to(article.url, article_path(article))
+
+h1 = "Podcast Feed"
+div = link_to "Link to your custom podcast feed", feed_path(current_user.secret_key)
