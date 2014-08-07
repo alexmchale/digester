@@ -33,20 +33,24 @@ class Article < ActiveRecord::Base
   end
 
   def create_mp3
+    # Don't re-encoder if the content hasn't changed.
     return if sha256 == Digest::SHA256.hexdigest(transcript)
 
+    # Build the MP3 file.
     encoder = ArticleEncoder.new(self)
     return unless encoder.encode
 
+    # Publish it to S3.
     publisher = ArticlePublisher.new(encoder.sha256, encoder.mp3_filename)
     return unless publisher.publish
 
+    # Update the article with the details determined during encoding.
     update_attributes!({
       :mp3_duration  => encoder.duration  ,
       :mp3_mime_type => encoder.mime_type ,
       :mp3_file_size => encoder.file_size ,
-      :sha256        => encoder.sha256    ,
       :mp3_url       => publisher.s3_url  ,
+      :sha256        => encoder.sha256    ,
     })
   end
 
