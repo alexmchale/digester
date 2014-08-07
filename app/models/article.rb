@@ -38,11 +38,15 @@ class Article < ActiveRecord::Base
     encoder = ArticleEncoder.new(self)
     return unless encoder.encode
 
+    publisher = ArticlePublisher.new(encoder.sha256, encoder.mp3_filename)
+    return unless publisher.publish
+
     update_attributes!({
       :mp3_duration  => encoder.duration  ,
       :mp3_mime_type => encoder.mime_type ,
       :mp3_file_size => encoder.file_size ,
       :sha256        => encoder.sha256    ,
+      :mp3_url       => publisher.s3_url  ,
     })
   end
 

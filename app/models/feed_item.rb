@@ -17,7 +17,7 @@ class FeedItem
   end
 
   def url
-    article.url
+    article.mp3_url
   end
 
   def image_url

@@ -28,7 +28,7 @@ class ArticleEncoder
 
     # Read back details about the MP3.
     TagLib::FileRef.open(mp3_filename.to_s) do |fileref|
-      @mime_type = "audio/mp3"
+      @mime_type = "audio/mpeg"
       @file_size = File.size(mp3_filename)
       @duration  = fileref.audio_properties.length
     end
