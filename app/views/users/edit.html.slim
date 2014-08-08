@@ -1,0 +1,9 @@
+h1 = "Edit your user account"
+
+= simple_form_for @user do |f|
+
+  = f.input :feed_title, as: :string
+  = f.input :feed_description, as: :text
+  = f.input :feed_image_url, as: :string
+
+  = f.submit

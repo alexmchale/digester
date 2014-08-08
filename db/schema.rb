@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140807154209) do
+ActiveRecord::Schema.define(version: 20140808005216) do
 
   create_table "articles", force: true do |t|
     t.text     "url"
@@ -36,6 +36,9 @@ ActiveRecord::Schema.define(version: 20140807154209) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "secret_key"
+    t.string   "feed_title"
+    t.text     "feed_description"
+    t.text     "feed_image_url"
   end
 
 end

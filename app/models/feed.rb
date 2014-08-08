@@ -4,10 +4,10 @@ class Feed
 
   def initialize(user)
     @user        = user
-    @title       = "Feed for #{ user.email }"
+    @title       = user.feed_title
     @url         = "http://example.com"
-    @description = ""
-    @image_url   = ""
+    @description = user.feed_description
+    @image_url   = user.feed_image_url
     @language    = ""
     @copyright   = ""
     @subtitle    = ""

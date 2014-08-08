@@ -12,3 +12,6 @@ html
   body
 
     = yield
+
+    - if current_user
+      div = link_to("Edit your #{ current_user.email } user preferences", edit_user_path(current_user))
