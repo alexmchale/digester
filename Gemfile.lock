@@ -107,6 +107,7 @@ GEM
     omniauth-xauth (0.0.2)
       oauth
       omniauth (~> 1.0)
+    pg (0.17.1)
     pismo (0.7.4)
       awesome_print
       chronic
@@ -199,6 +200,7 @@ DEPENDENCIES
   jquery-rails
   omniauth
   omniauth-instapaper
+  pg
   pismo
   podcastinator
   puma
