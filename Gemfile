@@ -21,3 +21,4 @@ gem 'taglib-ruby', require: 'taglib'
 gem 'fog'
 gem 'quiet_assets', group: :development
 gem 'puma'
+gem 'dotenv'
