@@ -22,3 +22,5 @@ gem 'fog'
 gem 'quiet_assets', group: :development
 gem 'puma'
 gem 'dotenv'
+gem 'delayed_job_active_record'
+gem 'daemons'
