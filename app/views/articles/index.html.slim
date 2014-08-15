@@ -16,7 +16,7 @@ table
       tr
         td = article.published_at.strftime("%b %d, %Y")
         td = article.title
-        td = article.author
+        td = article.author || raw("&mdash;")
         td
           = link_to(truncate(article.url, length: 50), article.url)
         td

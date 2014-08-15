@@ -24,12 +24,17 @@ class Article < ActiveRecord::Base
 
     # Set some defaults if we don't know the data.
     self.title        = "Unknown Title"  if title.blank?
-    self.author       = "Unknown Author" if author.blank?
+    self.author       = ""               if author.blank?
     self.published_at = Time.now         if published_at.blank?
     self.body         = ""               if body.blank?
 
     # Build the transcript that the voice engine will read.
-    self.transcript = [ title, "by", author, ",,,", body ].join(" ")
+    self.transcript =
+      if author.present?
+        [ title, "by", author, ",,,", body ].join(" ")
+      else
+        [ title, ",,,", body ].join(" ")
+      end
   end
 
   def create_mp3

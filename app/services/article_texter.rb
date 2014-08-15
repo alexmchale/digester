@@ -24,8 +24,6 @@ class ArticleTexter
   def author
     if pismo.authors.present?
       pismo.authors.join(", ")
-    else
-      "Unknown Author"
     end
   end
 
