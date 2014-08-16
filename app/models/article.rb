@@ -2,8 +2,7 @@ class Article < ActiveRecord::Base
 
   belongs_to :user
 
-  before_save :create_transcript
-  after_save :create_mp3
+  after_create -> { delay.create_transcript }
 
   validates :user_id, presence: true
 
@@ -13,7 +12,7 @@ class Article < ActiveRecord::Base
 
   def create_transcript
     # If we just have a URL, run it through the texter to get its details.
-    if url.present? && (new_record? || url_changed?)
+    if url.present?
       texter = ArticleTexter.new(self)
 
       self.title        = texter.title
@@ -35,6 +34,10 @@ class Article < ActiveRecord::Base
       else
         [ title, ",,,", body ].join(" ")
       end
+
+    # Persist and enqueue the job to create the MP3.
+    save!
+    delay(queue: :mac).create_mp3
   end
 
   def create_mp3

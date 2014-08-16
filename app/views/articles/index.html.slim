@@ -14,8 +14,8 @@ table
   tbody
     - @articles.each do |article|
       tr
-        td = article.published_at.strftime("%b %d, %Y")
-        td = article.title
+        td = article.published_at ? article.published_at.strftime("%b %d, %Y") : raw("&mdash;")
+        td = article.title ? article.title : raw("&mdash;")
         td = article.author || raw("&mdash;")
         td
           = link_to(truncate(article.url, length: 50), article.url)
