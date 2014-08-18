@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815105312) do
+ActiveRecord::Schema.define(version: 20140818100507) do
 
   create_table "articles", force: true do |t|
     t.text     "url"
@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(version: 20140815105312) do
     t.string   "feed_title"
     t.text     "feed_description"
     t.text     "feed_image_url"
+    t.string   "instapaper_token"
+    t.string   "instapaper_token_secret"
   end
 
 end
