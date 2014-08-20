@@ -1,0 +1,8 @@
+h1 = "Sign into Instapaper"
+
+= simple_form_for @instapaper_signin, url: user_instapaper_signin_path(@user) do |f|
+
+  = f.input :username, as: :string
+  = f.input :password, as: :password
+
+  = f.submit

@@ -18,12 +18,9 @@ class User < ActiveRecord::Base
 
   ### Callbacks ###
 
-  before_validation :get_instapaper_token
   before_save :generate_secret_key
 
   ### Miscellaneous ###
-
-  attr_accessor :instapaper_username, :instapaper_password
 
   ### Instance Methods ###
 
@@ -44,21 +41,6 @@ class User < ActiveRecord::Base
   def generate_secret_key!
     self.secret_key = ""
     generate_secret_key
-  end
-
-  def get_instapaper_token
-    return if instapaper_username.blank? && instapaper_password.blank?
-
-    auth = Instapaper.access_token(instapaper_username, instapaper_password)
-
-    if auth == nil || !auth.kind_of?(Hash)
-      self.errors[:instapaper_username] << "cannot connect to instapaper"
-    elsif auth.keys.sort != %w( oauth_token oauth_token_secret )
-      self.errors[:instapaper_username] << "invalid username or password"
-    else
-      self.instapaper_token        = auth["oauth_token"]
-      self.instapaper_token_secret = auth["oauth_token_secret"]
-    end
   end
 
   ### Class Methods ###
