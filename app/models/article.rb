@@ -12,7 +12,7 @@ class Article < ActiveRecord::Base
 
   def create_transcript
     # If we just have a URL, run it through the texter to get its details.
-    if url.present?
+    if url.present? && !body_provided?
       texter = ArticleTexter.new(self)
 
       self.title        = texter.title

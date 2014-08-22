@@ -1,0 +1,16 @@
+h1 = "Instapaper Bookmarks"
+
+table
+
+  thead
+    tr
+      th = "Title"
+      th = "URL"
+      th
+
+  tbody
+    - @bookmarks.each do |bookmark|
+      tr
+        td = bookmark.title
+        td = link_to(truncate_url(bookmark.url, length: 50), bookmark.url)
+        td

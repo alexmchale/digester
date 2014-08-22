@@ -43,6 +43,12 @@ class User < ActiveRecord::Base
     generate_secret_key
   end
 
+  def instapaper
+    if instapaper_token.present? && instapaper_token_secret.present?
+      @instapaper ||= InstapaperClient.new(self)
+    end
+  end
+
   ### Class Methods ###
 
 end

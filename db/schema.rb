@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140818100507) do
+ActiveRecord::Schema.define(version: 20140822104903) do
 
   create_table "articles", force: true do |t|
     t.text     "url"
@@ -28,6 +28,9 @@ ActiveRecord::Schema.define(version: 20140818100507) do
     t.string   "mp3_mime_type"
     t.integer  "mp3_file_size"
     t.text     "mp3_url"
+    t.integer  "instapaper_bookmark_id"
+    t.string   "instapaper_hash"
+    t.boolean  "body_provided"
   end
 
   create_table "delayed_jobs", force: true do |t|
