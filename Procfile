@@ -1,2 +1,2 @@
 web:    bin/rails server puma --port $PORT
-worker: bin/rake jobs:work
+worker: bin/rake jobs:work QUEUES=default
