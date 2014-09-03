@@ -17,3 +17,4 @@ config/database.yml
 /tmp
 public/articles
 .env
+config/remote_database.yml
