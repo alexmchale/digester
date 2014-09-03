@@ -18,7 +18,7 @@ class ArticleEncoder
     File.open(txt_filename, "w") { |f| f.puts transcript }
 
     # Build the AIFF file.
-    system "echo %s | say -o %s -v %s -f %s" % [
+    system "echo %s | say --output-file=%s --voice=%s --input-file=%s --progress" % [
       transcript,
       aiff_filename,
       aiff_voice,
