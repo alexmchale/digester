@@ -25,7 +25,7 @@ class FeedItem
   end
 
   def published_at
-    article.published_at
+    article.created_at
   end
 
   def subtitle
