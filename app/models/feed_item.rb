@@ -48,6 +48,10 @@ class FeedItem
     "http://digester.io/articles/#{ article.id }"
   end
 
+  def is_guid_permalink?
+    true
+  end
+
   def time
     published_at || created_at
   end
