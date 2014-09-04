@@ -137,7 +137,7 @@ GEM
       fast-stemmer
       nokogiri
       sanitize
-    podcastinator (0.0.3)
+    podcastinator (0.0.4)
       mime-types (~> 1.25)
       nokogiri (~> 1.6)
       taglib-ruby (~> 0.6)

@@ -45,7 +45,7 @@ class FeedItem
   end
 
   def guid
-    article.sha256
+    "http://digester.io/articles/#{ article.id }"
   end
 
   def time
