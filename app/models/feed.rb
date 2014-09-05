@@ -1,11 +1,12 @@
 class Feed
 
-  attr_reader :user, :title, :url, :description, :image_url, :language, :copyright, :subtitle, :author, :keywords, :owner
+  attr_reader :user, :title, :url, :description, :image_url, :language
+  attr_reader :copyright, :subtitle, :author, :keywords, :owner
 
   def initialize(user)
     @user        = user
     @title       = user.feed_title
-    @url         = "http://example.com"
+    @url         = "http://digester.io/feeds/#{ user.secret_key }"
     @description = user.feed_description
     @image_url   = user.feed_image_url
     @language    = ""
