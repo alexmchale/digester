@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
 
   ### Callbacks ###
 
+  before_validation :assign_default_image_url
   before_save :generate_secret_key
 
   ### Miscellaneous ###
@@ -31,6 +32,16 @@ class User < ActiveRecord::Base
   def password=(new_password)
     @password = Password.create(new_password)
     self.password_hash = @password
+  end
+
+  def email_md5
+    Digest::MD5.hexdigest(email)
+  end
+
+  def assign_default_image_url
+    return if feed_image_url.present?
+    return if email.blank?
+    self.feed_image_url = "http://www.gravatar.com/avatar/#{ email_md5 }.jpg?s=512&r=g&d=monsterid"
   end
 
   def generate_secret_key

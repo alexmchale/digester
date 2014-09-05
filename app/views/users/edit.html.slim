@@ -1,5 +1,8 @@
 h1 = "Edit your user account"
 
+- if @user.feed_image_url.present?
+  img src=@user.feed_image_url height="200"
+
 = simple_form_for @user do |f|
 
   = f.input :feed_title, as: :string
