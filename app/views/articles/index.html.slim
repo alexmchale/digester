@@ -12,9 +12,9 @@ table
       td
 
   tbody
-    - @articles.each do |article|
+    - @articles.order("created_at DESC").each do |article|
       tr
-        td = article.published_at ? article.published_at.in_time_zone(Time.zone).strftime("%b %d, %Y") : raw("&mdash;")
+        td.nonbreaking = article.created_at.in_time_zone(Time.zone).strftime("%b %d, %Y")
         td = article.title ? article.title : raw("&mdash;")
         td = article.author || raw("&mdash;")
         td
