@@ -16,6 +16,7 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
+gem 'browser-timezone-rails'
 
 # views
 gem 'jbuilder'

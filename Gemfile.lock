@@ -30,6 +30,9 @@ GEM
     arel (5.0.1.20140414130214)
     awesome_print (1.2.0)
     bcrypt (3.1.7)
+    browser-timezone-rails (0.0.7)
+      jquery-rails
+      rails (>= 3.1)
     builder (3.2.2)
     chronic (0.10.2)
     coffee-rails (4.0.1)
@@ -226,6 +229,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt
+  browser-timezone-rails
   coffee-rails
   daemons
   delayed_job-ssh_remote_worker
