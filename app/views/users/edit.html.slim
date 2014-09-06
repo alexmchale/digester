@@ -10,3 +10,8 @@ h1 = "Edit your user account"
   = f.input :feed_image_url, as: :string
 
   = f.submit
+
+- if @user.instapaper == nil
+  p = link_to("Sign into Instapaper to pull your bookmarks into Digester", new_user_instapaper_signin_path(@user))
+- else
+  p = link_to("You are signed into Instapaper - Change your Instapaper signin", new_user_instapaper_signin_path(@user))
