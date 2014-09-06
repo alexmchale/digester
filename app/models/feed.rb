@@ -18,8 +18,10 @@ class Feed
   end
 
   def items
-    user.articles
-      .order("published_at DESC")
+    user
+      .articles
+      .mp3_published
+      .order("created_at DESC")
       .to_a
       .select(&:mp3_ready?)
       .map { |article| FeedItem.new(article) }

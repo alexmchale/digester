@@ -1,10 +1,28 @@
 class Article < ActiveRecord::Base
 
+  ### Modules ###
+
+  ### Constants ###
+
+  ### Relations ###
+
   belongs_to :user
+
+  ### Scopes ###
+
+  scope :mp3_published, -> { where("mp3_url is not null") }
+
+  ### Validations ###
+
+  validates :user_id, presence: true
+
+  ### Callbacks ###
 
   after_create -> { delay.create_transcript }
 
-  validates :user_id, presence: true
+  ### Miscellaneous ###
+
+  ### Instance Methods ###
 
   def mp3_ready?
     sha256.present?
@@ -64,5 +82,7 @@ class Article < ActiveRecord::Base
     # Clean up the local files created during the encode.
     encoder.purge
   end
+
+  ### Class Methods ###
 
 end
