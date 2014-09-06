@@ -32,6 +32,7 @@ gem 'taglib-ruby', require: 'taglib'
 gem 'dotenv'
 gem 'net-ssh'
 gem 'net-ssh-gateway'
+gem 'paranoia'
 
 # web clients
 gem 'ethon'

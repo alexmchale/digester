@@ -17,7 +17,7 @@ class InstapaperSync
     # Lock on the user so we don't try to do this in multiple threads.
     user.with_lock do
       # Update bookmarks that already exist.
-      user.articles.where(instapaper_bookmark_id: bookmarks.map(&:id)).each do |article|
+      user.articles.with_deleted.where(instapaper_bookmark_id: bookmarks.map(&:id)).each do |article|
         # Get the existing bookmark.
         bookmark = bookmarks.find { |b| b["bookmark_id"] == article.instapaper_bookmark_id }
         next unless bookmark

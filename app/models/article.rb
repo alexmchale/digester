@@ -22,6 +22,8 @@ class Article < ActiveRecord::Base
 
   ### Miscellaneous ###
 
+  acts_as_paranoid
+
   ### Instance Methods ###
 
   def mp3_ready?
