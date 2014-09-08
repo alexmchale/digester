@@ -15,3 +15,7 @@ h1 = "Edit your user account"
   p = link_to("Sign into Instapaper to pull your bookmarks into Digester", new_user_instapaper_signin_path(@user))
 - else
   p = link_to("You are signed into Instapaper - Change your Instapaper signin", new_user_instapaper_signin_path(@user))
+
+p
+  = "Drag this link to your Bookmarks Bar -> "
+  = link_to("Digest This Page", @user.add_article_bookmarklet(request.host, request.port))

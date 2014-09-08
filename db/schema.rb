@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140906073749) do
+ActiveRecord::Schema.define(version: 20140907180605) do
 
   create_table "articles", force: true do |t|
     t.text     "url"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140906073749) do
     t.string   "instapaper_hash"
     t.boolean  "body_provided"
     t.datetime "deleted_at"
+    t.text     "raw_html"
   end
 
   create_table "delayed_jobs", force: true do |t|
@@ -61,6 +62,7 @@ ActiveRecord::Schema.define(version: 20140906073749) do
     t.text     "feed_image_url"
     t.string   "instapaper_token"
     t.string   "instapaper_token_secret"
+    t.string   "bookmark_key"
   end
 
 end

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resource :instapaper_signin, module: "users"
+    resources :open_articles
   end
 
   resources :articles

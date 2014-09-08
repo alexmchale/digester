@@ -45,8 +45,13 @@ class User < ActiveRecord::Base
   end
 
   def generate_secret_key
-    return if secret_key.present?
-    self.secret_key = SecureRandom.urlsafe_base64(1024).gsub(/[^a-zA-Z0-9]/, "")[0, 32]
+    if secret_key.blank?
+      self.secret_key = SecureRandom.urlsafe_base64(1024).gsub(/[^a-zA-Z0-9]/, "")[0, 32]
+    end
+    if bookmark_key.blank?
+      self.bookmark_key = SecureRandom.urlsafe_base64(1024).gsub(/[^a-zA-Z0-9]/, "")[0, 32]
+    end
+    self
   end
 
   def generate_secret_key!
@@ -58,6 +63,17 @@ class User < ActiveRecord::Base
     if instapaper_token.present? && instapaper_token_secret.present?
       @instapaper ||= InstapaperClient.new(self)
     end
+  end
+
+  def add_article_bookmarklet(hostname, port)
+    coffee_filename = Rails.root.join("app", "assets", "javascripts", "bookmarklet", "client.js.coffee")
+    coffee_raw      = File.read(coffee_filename)
+    js_raw          = CoffeeScript.compile(coffee_raw)
+    js_uglified     = Uglifier.new.compile(js_raw)
+
+    "javascript:#{ js_uglified }void(0)"
+      .gsub("%%hostname%%", "#{ hostname }:#{ port }")
+      .gsub("%%secret_key%%", self.bookmark_key)
   end
 
   ### Class Methods ###

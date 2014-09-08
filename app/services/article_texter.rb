@@ -1,18 +1,18 @@
 class ArticleTexter
 
-  attr_reader :article, :url
+  attr_reader :article, :data
 
   def initialize(article)
     @article = article
-    @url     = article.url
+    @data    = [ article.raw_html, article.url ].find(&:present?)
   end
 
   def pismo
-    @pismo ||= Pismo::Document.new(url)
+    @pismo ||= Pismo::Document.new(data)
   end
 
   def title
-    pismo.titles.inject("") do |title1, title2|
+    pismo.titles.compact.inject("") do |title1, title2|
       if title1.length > title2.length
         title1
       else

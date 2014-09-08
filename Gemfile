@@ -33,6 +33,7 @@ gem 'dotenv'
 gem 'net-ssh'
 gem 'net-ssh-gateway'
 gem 'paranoia'
+gem 'sanitize'
 
 # web clients
 gem 'ethon'
@@ -49,3 +50,5 @@ gem 'spring', group: :development
 gem 'quiet_assets', group: :development
 gem 'foreman'
 gem 'daemons'
+gem 'whiny_validation', group: :development
+gem 'pry'

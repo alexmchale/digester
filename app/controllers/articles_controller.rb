@@ -7,6 +7,7 @@ class ArticlesController < InheritedResourcesController
   def permitted_params
     params.permit(:article => %i(
       url
+      raw_html
     ))
   end
 

@@ -18,6 +18,10 @@ class Article < ActiveRecord::Base
 
   ### Callbacks ###
 
+  before_validation -> {
+    self.raw_html.scrub! if self.raw_html
+  }
+
   after_create -> { delay.create_transcript }
 
   ### Miscellaneous ###
@@ -32,7 +36,7 @@ class Article < ActiveRecord::Base
 
   def create_transcript
     # If we just have a URL, run it through the texter to get its details.
-    if url.present? && !body_provided?
+    if [ url, raw_html ].any?(&:present?) && !body_provided?
       texter = ArticleTexter.new(self)
 
       self.title        = texter.title
@@ -60,17 +64,17 @@ class Article < ActiveRecord::Base
     delay(queue: :mac).create_mp3
   end
 
-  def create_mp3
+  def create_mp3(force: false)
     # Don't re-encoder if the content hasn't changed.
-    return if sha256 == Digest::SHA256.hexdigest(transcript)
+    return if !force && sha256 == Digest::SHA256.hexdigest(transcript)
 
     # Build the MP3 file.
     encoder = ArticleEncoder.new(self)
-    return unless encoder.encode
+    return if !force && !encoder.encode
 
     # Publish it to S3.
     publisher = ArticlePublisher.new(encoder.sha256, encoder.mp3_filename)
-    return unless publisher.publish
+    return if !force && !publisher.publish
 
     # Update the article with the details determined during encoding.
     update_attributes!({
